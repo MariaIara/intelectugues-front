@@ -1,3 +1,8 @@
+<script setup>
+import FormButton from '@/components/FormButton.vue';
+
+</script>
+
 <template>
   <div class="bg-linear-to-r from-[#E7F1F5] to-[#F7FCFD] h-screen flex justify-center items-center font-[Roboto]">
     <div class="bg-white border border-[#DFDFDF] p-8 w-full max-w-md rounded-2xl flex flex-col items-center mx-5">
@@ -21,10 +26,7 @@
             <input type="password" name="password_confirmation" class="w-full mt-1 block bg-[#EBEBEB] rounded-lg p-2.5" placeholder="*******" required>
           </div>
         </div>
-        <button 
-          class="block font-[Poppins] bg-[#98BF45] w-max mx-auto px-10 py-3 rounded-lg text-white font-bold shadow-[4px_4px_0_#6F8C30] mt-6 cursor-pointer hover:shadow-none hover:translate-1 transition-all">
-          Criar Conta
-        </button>
+        <FormButton title="Criar Conta"/>
       </form>
       <p class="mt-6 text-center">Já possui conta? <router-link to="/login" class="text-[#6F8C30] cursor-pointer underline">Entrar na conta</router-link>.</p>
     </div>
