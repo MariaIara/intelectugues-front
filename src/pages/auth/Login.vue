@@ -16,7 +16,7 @@
           Entrar na Conta
         </button>
       </form>
-      <p class="mt-6 text-center">Ainda não possui conta? <span class="text-[#6F8C30] cursor-pointer underline">Criar conta</span>.</p>
+      <p class="mt-6 text-center">Ainda não possui conta? <router-link to="/register" class="text-[#6F8C30] cursor-pointer underline">Criar conta</router-link>.</p>
     </div>
   </div>
 </template>
