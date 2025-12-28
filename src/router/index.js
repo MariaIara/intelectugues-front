@@ -3,11 +3,12 @@ import Home from '@/pages/app/Home.vue'
 import Login from '@/pages/auth/Login.vue'
 import NotFound from '@/pages/error/NotFound.vue'
 import Register from '@/pages/auth/Register.vue'
+import LandingPage from '@/pages/LandingPage.vue'
 
 const routes = [
   {
     path: '/',
-    component: Home
+    component: LandingPage
   },
   {
     path: '/login',
@@ -16,6 +17,10 @@ const routes = [
   {
     path: '/register',
     component: Register
+  },
+  {
+    path: '/app',
+    component: Home
   },
   {
     path: '/:pathMatch(.*)*',

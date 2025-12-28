@@ -1,6 +1,13 @@
 <script setup>
 import FormButton from "@/components/FormButton.vue";
-import { reactive } from "vue";
+import Loading from "@/components/Loading.vue";
+import { reactive, ref } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+const loading = ref(false);
+const errors = ref({});
 
 const form = reactive({
   email: '',
@@ -9,6 +16,9 @@ const form = reactive({
 
 
 async function submitForm() {
+  loading.value = true;
+  errors.value = {};
+
   try {
     const res = await fetch('http://localhost/api/login', {
       method: 'POST',
@@ -21,9 +31,20 @@ async function submitForm() {
     });
 
     const data = await res.json();
-    console.log(data);
+
+    if (!res.ok) {
+      return errors.value = data.errors ?? {
+        general: data.message ?? 'Erro inesperado'
+      };
+    }
+
+    localStorage.setItem('token', data.token);
+
+    router.push('/app');
   } catch (error) {
-    console.error('Erro ao enviar formulário:', error)
+    errors.value = { general: 'Erro de conexão com o servidor' };
+  } finally {
+    loading.value = false;
   }
 }
 </script>
@@ -37,11 +58,20 @@ async function submitForm() {
           <label for="email" class="font-[Poppins] text-sm"> Email </label>
           <input type="email" name="email" v-model="form.email" class="w-full mt-1 block bg-[#EBEBEB] rounded-lg p-2.5"
             placeholder="maria@gmail.com" required />
+          <p v-if="errors.email" class="text-red-500 text-xs mt-1">
+            {{ errors.email[0] }}
+          </p>
         </div>
         <div class="w-full">
           <label for="password" class="font-[Poppins] text-sm">Senha</label>
           <input type="password" name="password" v-model="form.password"
             class="w-full mt-1 block bg-[#EBEBEB] rounded-lg p-2.5" placeholder="*******" required />
+          <p v-if="errors.password" class="text-red-500 text-xs mt-1">
+            {{ errors.password[0] }}
+          </p>
+        </div>
+        <div v-if="errors.general" class="w-full bg-red-100 text-red-700 p-3 rounded-lg mt-4 text-sm">
+          {{ errors.general }}
         </div>
         <FormButton title="Entrar na Conta" @click="submitForm" />
       </form>
@@ -51,4 +81,5 @@ async function submitForm() {
       </p>
     </div>
   </div>
+  <Loading v-if="loading" />
 </template>
