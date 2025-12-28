@@ -1,3 +1,9 @@
+<script>
+await fetch('http://localhost/sanctum/csrf-cookie', {
+  credentials: 'include'
+});
+</script>
+
 <template>
-  <h1 class="text-red-500">Hello World!</h1>
+  <router-view />
 </template>
