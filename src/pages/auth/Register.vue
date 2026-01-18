@@ -1,13 +1,15 @@
 <script setup>
+import Errors from "@/components/Errors.vue";
 import FormButton from "@/components/FormButton.vue";
 import Loading from "@/components/Loading.vue";
+import { register } from "@/services/auth/register";
 import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
 
 const loading = ref(false);
-const errors = ref({});
+const errors = ref([]);
 
 const form = reactive({
   name: '',
@@ -21,29 +23,13 @@ async function submitForm() {
   errors.value = {};
 
   try {
-    const res = await fetch('http://localhost/api/register', {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify(form)
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      return errors.value = data.errors ?? {
-        general: data.message ?? 'Erro inesperado'
-      };
-    }
+    const { data } = await register(form.name, form.email, form.password, form.password_confirmation);
 
     localStorage.setItem('token', data.token);
-
     router.push('/app');
+
   } catch (error) {
-    errors.value = { general: 'Erro de conexão com o servidor' };
+    errors.value = error;
   } finally {
     loading.value = false;
   }
@@ -61,17 +47,11 @@ async function submitForm() {
           </label>
           <input type="text" name="name" v-model="form.name" class="w-full mt-1 block bg-[#EBEBEB] rounded-lg p-2.5"
             placeholder="Maria das Dores" required>
-          <p v-if="errors.name" class="text-red-500 text-xs mt-1">
-            {{ errors.name[0] }}
-          </p>
         </div>
         <div class="w-full">
           <label for="email" class="font-[Poppins] text-sm">Email</label>
           <input type="email" name="email" v-model="form.email" class="w-full mt-1 block bg-[#EBEBEB] rounded-lg p-2.5"
             placeholder="maria@gmail.com" required>
-          <p v-if="errors.email" class="text-red-500 text-xs mt-1">
-            {{ errors.email[0] }}
-          </p>
         </div>
         <div>
           <div class="flex items-center gap-5">
@@ -86,15 +66,8 @@ async function submitForm() {
                 class="w-full mt-1 block bg-[#EBEBEB] rounded-lg p-2.5" placeholder="*******" required>
             </div>
           </div>
-          <p v-if="errors.password" class="text-red-500 text-xs mt-1">
-            {{ errors.password[0] }}
-          </p>
         </div>
-
-        <div v-if="errors.general" class="w-full bg-red-100 text-red-700 p-3 rounded-lg mt-4 text-sm">
-          {{ errors.general }}
-        </div>
-
+        <Errors :errors="errors" />
         <FormButton title="Criar Conta" @click="submitForm" />
       </form>
       <p class="mt-6 text-center">Já possui conta? <router-link to="/login"
