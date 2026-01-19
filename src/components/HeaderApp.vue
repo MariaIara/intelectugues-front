@@ -5,9 +5,10 @@ import ProfilePicture from "@/components/ProfilePicture.vue";
 
 </script>
 
-<template> 
-    <header class="bg-white flex justify-between items-center px-12 py-4">
-      <Logo/>
+<template>
+  <header class="bg-white font-[Poppins] py-4">
+    <div class="max-w-360 mx-auto px-5 flex justify-between items-center">
+      <Logo />
       <div class="flex items-center gap-8">
         <div class="flex gap-4 items-center">
           <div class="flex items-center gap-1.5 bg-[#FFF9D1] rounded-3xl h-full px-6 py-2 border border-[#F2DC4E]">
@@ -19,7 +20,8 @@ import ProfilePicture from "@/components/ProfilePicture.vue";
             <p class="text-[#F25041]">12 dias</p>
           </div>
         </div>
-        <ProfilePicture/>
+        <ProfilePicture />
       </div>
-    </header>
+    </div>
+  </header>
 </template>
