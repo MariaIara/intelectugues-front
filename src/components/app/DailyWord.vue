@@ -2,6 +2,7 @@
 import { api } from '@/lib/api';
 import { Star } from 'lucide-vue-next';
 import { onMounted, reactive, ref } from 'vue';
+import Loading from '../Loading.vue';
 
 const loading = ref(false);
 const errors = ref([]);
@@ -30,7 +31,6 @@ const fetchDailyWord = async () => {
 onMounted(() => {
     fetchDailyWord();
 });
-
 </script>
 
 <template>
@@ -53,4 +53,5 @@ onMounted(() => {
             </span>
         </div>
     </div>
+    <Loading v-if="loading" />
 </template>

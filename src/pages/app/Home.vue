@@ -1,13 +1,14 @@
 <script setup>
 import Achievement from "@/components/Achievement.vue";
 import Button from "@/components/Button.vue";
-import DailyWord from "@/components/daily-word.vue";
+import DailyWord from "@/components/app/DailyWord.vue";
 import HeaderApp from "@/components/HeaderApp.vue";
-import RankDiv from "@/components/RankDiv.vue";
+import RankDiv from "@/components/app/RankDiv.vue";
 import Title from "@/components/Title.vue";
 import TrackToLeft from "@/components/TrackToLeft.vue";
 import TrackToRight from "@/components/TrackToRight.vue";
-import { BookOpenCheck, CircleStar, Drama, Flame, GraduationCap, Handshake, Medal, NotebookPen, Rocket, Sparkles, TrendingUp, Trophy, Zap } from "lucide-vue-next";
+import { BookOpenCheck, Drama, GraduationCap, Handshake, Medal, NotebookPen, Rocket, Sparkles, TrendingUp, Zap } from "lucide-vue-next";
+import Progress from "@/components/app/Progress.vue";
 
 </script>
 
@@ -15,35 +16,7 @@ import { BookOpenCheck, CircleStar, Drama, Flame, GraduationCap, Handshake, Meda
   <div class="bg-linear-to-r from-[#E7F1F5] to-[#F7FCFD] h-full pb-6">
     <HeaderApp />
     <section id="section-one" class="max-w-360 mx-auto grid grid-cols-[2.3fr_1fr] px-5 mt-10 gap-6">
-      <div id="progress" class="bg-white border border-[#DFDFDF] rounded-2xl p-8">
-        <div class="flex justify-between">
-          <Title title="Acompanhe seu Progresso" />
-          <a href="#" class="text-sm text-[#6E6E6E] underline">Ver Mais</a>
-        </div>
-        <div class="grid grid-cols-3 items-center mt-6 gap-4">
-          <div class="bg-[#FAE8E7] text-[#F25041] border-4 border-[#F25041] rounded-2xl text-center px-12 py-6">
-            <Flame class="m-auto w-8 h-8" />
-            <p class="font-medium font-[Poppins] text-2xl mt-2">12 dias</p>
-            <p>Sequência</p>
-          </div>
-          <div class="bg-[#FFFBE4] text-[#998400] border-4 border-[#F2DC4E] rounded-2xl text-center px-12 py-6">
-            <Trophy class="m-auto w-8 h-8" />
-            <p class="font-medium font-[Poppins] text-2xl mt-2">80 pontos</p>
-            <p>12/20 XP</p>
-          </div>
-          <div class="bg-[#C6E0ED] text-[#246385] border-4 border-[#246385] rounded-2xl text-center px-12 py-6">
-            <CircleStar class="m-auto w-8 h-8" />
-            <p class="font-medium font-[Poppins] text-2xl mt-2">Prata</p>
-            <p>Nível</p>
-          </div>
-        </div>
-        <div class="mt-6">
-          <p class="text-sm">Seu progresso no nível Prata é de 80%</p>
-          <div class="block bg-[#BDBDBD] rounded-full w-full h-3.5">
-            <div class="bg-linear-to-r from-[#98BF45] to-[#6F8C30] rounded-full w-8/10 h-3.5 mt-1"></div>
-          </div>
-        </div>
-      </div>
+      <Progress />
       <DailyWord />
     </section>
 
