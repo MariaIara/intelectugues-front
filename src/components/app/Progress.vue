@@ -43,7 +43,7 @@ onMounted(() => {
         <div class="grid grid-cols-3 items-center mt-6 gap-4">
             <div class="bg-[#FAE8E7] text-[#F25041] border-4 border-[#F25041] rounded-2xl text-center px-12 py-6">
                 <Flame class="m-auto w-8 h-8" />
-                <p class="font-medium font-[Poppins] text-2xl mt-2">{{ data.sequence }} dias</p>
+                <p class="font-medium font-[Poppins] text-2xl mt-2">{{ data.general_sequence }} dias</p>
                 <p>Sequência</p>
             </div>
             <div class="bg-[#FFFBE4] text-[#998400] border-4 border-[#F2DC4E] rounded-2xl text-center px-12 py-6">

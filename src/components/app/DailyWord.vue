@@ -8,11 +8,13 @@ const loading = ref(false);
 const errors = ref([]);
 
 const data = reactive({
+    id: '',
     date: '',
     word: '',
     category: '',
     meaning: '',
-    synonymous: []
+    synonymous: [],
+    is_favorited: false
 });
 
 const fetchDailyWord = async () => {
@@ -31,6 +33,22 @@ const fetchDailyWord = async () => {
 onMounted(() => {
     fetchDailyWord();
 });
+
+const handleFavorite = async () => {
+    try {
+        loading.value = true;
+        await api.post(`/words/${data.id}/favorite`, {
+            word: data.word
+        });
+
+        data.is_favorited = !data.is_favorited
+    } catch (error) {
+        errors.value = error;
+    } finally {
+        loading.value = false;
+    }
+}
+
 </script>
 
 <template>
@@ -44,12 +62,16 @@ onMounted(() => {
                 <h4 class="font-medium text-2xl text-white">{{ data.word }}</h4>
                 <p class="text-sm text-[#E6E6E6]">{{ data.category }}</p>
             </div>
-            <Star class="text-[#FFF2E1]" />
+            <button class="self-start" @click="handleFavorite">
+                <Star :fill="data.is_favorited ? '#FFF2E1' : 'none'" :stroke="data.is_favorited ? '#FFF2E1' : '#FFF2E1'"
+                    class="text-white" />
+            </button>
         </div>
-        <p class="text-white mt-6">{{ data.meaning }}</p>
+        <p class=" text-white mt-6">{{ data.meaning }}</p>
         <div class="flex mt-4 gap-4">
             <span v-for="(synonym, index) in data.synonymous" :key="index"
-                class="bg-[#FFF2E1] border border-[#FFDCAB] text-[#545454] rounded-2xl px-4 py-1"> {{ synonym }}
+                class="bg-[#FFF2E1] border border-[#FFDCAB] text-[#545454] rounded-2xl px-4 py-1"> {{
+                    synonym }}
             </span>
         </div>
     </div>
