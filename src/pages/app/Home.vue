@@ -5,10 +5,9 @@ import DailyWord from "@/components/app/DailyWord.vue";
 import HeaderApp from "@/components/HeaderApp.vue";
 import RankDiv from "@/components/app/RankDiv.vue";
 import Title from "@/components/Title.vue";
-import TrackToLeft from "@/components/TrackToLeft.vue";
-import TrackToRight from "@/components/TrackToRight.vue";
-import { BookOpenCheck, Drama, GraduationCap, Handshake, Medal, NotebookPen, Rocket, Sparkles, TrendingUp, Zap } from "lucide-vue-next";
+import { BookOpenCheck, GraduationCap, Medal, Rocket, TrendingUp, Zap } from "lucide-vue-next";
 import Progress from "@/components/app/Progress.vue";
+import Tracks from "@/components/app/Tracks.vue";
 
 </script>
 
@@ -21,19 +20,7 @@ import Progress from "@/components/app/Progress.vue";
     </section>
 
     <section id="section-two" class="max-w-360 max-h-fit mx-auto grid grid-cols-[2.3fr_1fr] px-5 mt-6 gap-6">
-      <div id="tracks" class="bg-white border border-[#DFDFDF] rounded-2xl p-8 max-h-fit">
-        <Title title="Trilhas de Estudo" />
-        <div class="grid grid-cols-2 mt-6">
-          <TrackToLeft backgroundColor="#FAE8E7" effectsColor="#F25041" textColor="#F25041"
-            backgroundColorIcon="#FE8276" :icon="Handshake" />
-          <TrackToRight backgroundColor="#C6E0ED" effectsColor="#246385" textColor="#246385"
-            backgroundColorIcon="#519AC0" :icon="NotebookPen" />
-          <TrackToLeft backgroundColor="#FFFBE4" effectsColor="#F2DC4E" textColor="#998400"
-            backgroundColorIcon="#F5EBA6" :icon="Sparkles" />
-          <TrackToRight backgroundColor="#E4F6BC" effectsColor="#98BF45" textColor="#98BF45"
-            backgroundColorIcon="#B9DB70" :icon="Drama" />
-        </div>
-      </div>
+      <Tracks />
 
       <div class="grid grid-rows-[5fr_1fr]">
         <div id="ranking" class="bg-white border border-[#DFDFDF] rounded-2xl p-8">
