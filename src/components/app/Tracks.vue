@@ -1,6 +1,5 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import axios from 'axios'
 
 import { Drama, Handshake, NotebookPen, Sparkles } from 'lucide-vue-next'
 import TrackItem from './TrackItem.vue'
@@ -40,7 +39,14 @@ const colors = [
         textColor: '#98BF45',
         backgroundColorIcon: '#B9DB70'
     }
-]
+];
+
+const tips = [
+    '💡 Antes de P ou B: use M',
+    '💡 Som de Z entre vogais: use S',
+    '💡 Plural de palavras em ÃO: ões',
+    '💡 Plural de palavras em L: is'
+];
 
 
 async function loadTracks() {
@@ -49,11 +55,36 @@ async function loadTracks() {
 
         const apiTracks = response.data.data.data;
 
-        tracks.value = apiTracks.map(track => ({
-            ...track
-        }));
+        const tracksWithData = await Promise.all(
+            apiTracks.map(async (track) => {
+                const attemptsData = await loadAttemptsByTrack(track.id);
+
+                return {
+                    ...track,
+                    track_progress: attemptsData.track_progress,
+                    attempts: attemptsData.attempts
+                };
+            })
+        );
+
+        tracks.value = tracksWithData;
     } catch (error) {
         console.error('Erro ao buscar trilhas:', error);
+    }
+}
+
+async function loadAttemptsByTrack(trackId) {
+    try {
+        const response = await api.get(`user/tracks/${trackId}/challenge-attempts`);
+
+        const data = response.data.data;
+
+        return {
+            track_progress: data.track_progress,
+            attempts: data.attempts
+        };
+    } catch (error) {
+        console.error('Erro ao buscar tentativas:', error);
     }
 }
 
@@ -65,8 +96,9 @@ onMounted(loadTracks)
         <Title title="Trilhas de Estudo" />
         <div class="grid grid-cols-2 mt-6">
             <TrackItem v-for="track in tracks" :key="track.id" :index="track.index" :name="track.name"
-                :icon="icons[track.index]" :backgroundColor="colors[track.index].backgroundColor"
-                :effectsColor="colors[track.index].effectsColor" :textColor="colors[track.index].textColor"
+                :tip="tips[track.index]" :track_progress="track.track_progress" :icon="icons[track.index]"
+                :backgroundColor="colors[track.index].backgroundColor" :effectsColor="colors[track.index].effectsColor"
+                :textColor="colors[track.index].textColor"
                 :backgroundColorIcon="colors[track.index].backgroundColorIcon" />
         </div>
     </div>
