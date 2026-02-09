@@ -95,7 +95,7 @@ onMounted(loadTracks)
     <div id="tracks" class="bg-white border border-[#DFDFDF] rounded-2xl p-8 max-h-fit">
         <Title title="Trilhas de Estudo" />
         <div class="grid grid-cols-2 mt-6">
-            <TrackItem v-for="track in tracks" :key="track.id" :index="track.index" :name="track.name"
+            <TrackItem v-for="track in tracks" :key="track.id" :index="track.index" :id="track.id" :name="track.name"
                 :tip="tips[track.index]" :track_progress="track.track_progress" :icon="icons[track.index]"
                 :backgroundColor="colors[track.index].backgroundColor" :effectsColor="colors[track.index].effectsColor"
                 :textColor="colors[track.index].textColor"
