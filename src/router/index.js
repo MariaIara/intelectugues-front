@@ -4,7 +4,7 @@ import Login from '@/pages/auth/Login.vue'
 import NotFound from '@/pages/error/NotFound.vue'
 import Register from '@/pages/auth/Register.vue'
 import LandingPage from '@/pages/LandingPage.vue'
-import Track from '@/pages/app/Track.vue'
+import TrackPage from '@/pages/app/TrackPage.vue'
 
 const routes = [
   {
@@ -28,7 +28,7 @@ const routes = [
   },
   {
     path: '/app/track/:id',
-    component: Track,
+    component: TrackPage,
     meta: {
       requiresAuth: true
     }
