@@ -1,13 +1,20 @@
 <script setup>
 import { api } from '@/lib/api'
-import { NotebookPen } from 'lucide-vue-next'
-import { onMounted, ref } from 'vue'
+import { Drama, Handshake, NotebookPen, Sparkles } from 'lucide-vue-next'
+import { computed, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 const track = ref(null)
 
 const route = useRoute()
 const trackId = route.params.id
+
+const icons = {
+    Drama,
+    Handshake,
+    NotebookPen,
+    Sparkles
+};
 
 async function loadTrack(trackId) {
     try {
@@ -49,16 +56,25 @@ async function loadAttemptsByTrack(trackId) {
 
 onMounted(() => {
     loadTrack(trackId)
-})
+});
+
+const iconGradient = computed(() => {
+    if (!track.value?.metadata) return ''
+
+    return `linear-gradient(to right, ${track.value.metadata.effectsColor}, ${track.value.metadata.backgroundColorIcon})`
+});
 </script>
 
 
 <template>
-    <section class="bg-white mt-10 mx-10 px-10 p-6 rounded-2xl border border-[#DFDFDF]">
+    <section class="bg-white px-10 p-6 rounded-2xl border border-[#DFDFDF]">
         <div class="flex items-center justify-between">
             <div class="flex items-center gap-4">
-                <div class="bg-linear-to-r from-[#246385] to-[#519AC0] rounded-2xl w-fit p-4">
-                    <NotebookPen class="text-[#C6E0ED] w-12 h-12 m-auto" />
+                <div class="rounded-2xl w-fit p-4" :style="{
+                    background: iconGradient
+                }">
+                    <component :is="icons[track?.metadata.icon]" class="h-12 w-12"
+                        :style="{ color: track?.metadata.backgroundColor }" />
                 </div>
                 <div class="text-[#424242] mx-4">
                     <h1 class="font-[Poppins] font-semibold text-2xl">{{ track?.name }}</h1>
@@ -74,7 +90,7 @@ onMounted(() => {
         </div>
         <div class="bg-[#EAEAEA] rounded-full w-full h-3.5 mt-4">
             <div class="rounded-full h-3.5" :style="{
-                backgroundColor: '#246385',
+                backgroundColor: track?.metadata.effectsColor,
                 width: `${track?.track_progress}%`
             }" />
         </div>
