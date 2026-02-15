@@ -22,7 +22,7 @@ import HeaderApp from "@/components/app/HeaderApp.vue";
     <section id="section-two" class="max-w-360 max-h-fit mx-auto grid grid-cols-[2.3fr_1fr] px-5 mt-6 gap-6">
       <Tracks />
 
-      <div class="grid grid-rows-[5fr_1fr]">
+      <div class="grid grid-rows-[5fr_1fr] max-h-fit">
         <div id="ranking" class="bg-white border border-[#DFDFDF] rounded-2xl p-8">
           <div class="flex justify-between">
             <Title title="Ranking" />
@@ -52,12 +52,12 @@ import HeaderApp from "@/components/app/HeaderApp.vue";
         <div id="daily-challenge"
           class="bg-linear-to-r from-[#95CAE6] to-[#DCF3FF] border border-[#DFDFDF] rounded-2xl py-4 px-6 mt-6">
           <div class="flex items-center gap-4">
-            <Title title="Desafio Diário" />
+            <Title title="Desafio Diário" class="mt-2" />
             <Rocket class="text-[#3B3939]" />
           </div>
-          <p class="text-lg mt-1">
+          <p class="text-lg mt-2">
             Ganhe + 100 pontos extras.
-            <a href="#" class="underline">Clique para começar.</a>
+            <a href="#" class="underline">Comece agora.</a>
           </p>
         </div>
       </div>
