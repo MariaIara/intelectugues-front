@@ -6,7 +6,6 @@ import { api } from '@/lib/api'
 
 const tracks = ref([]);
 
-
 async function loadTracks() {
     try {
         const response = await api.get('/tracks');
