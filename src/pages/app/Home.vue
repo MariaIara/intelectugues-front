@@ -8,6 +8,7 @@ import { BookOpenCheck, GraduationCap, Medal, Rocket, TrendingUp, Zap } from "lu
 import Progress from "@/components/app/Progress.vue";
 import Tracks from "@/components/app/Tracks.vue";
 import HeaderApp from "@/components/app/HeaderApp.vue";
+import Rank from "@/components/app/Rank.vue";
 
 </script>
 
@@ -23,32 +24,7 @@ import HeaderApp from "@/components/app/HeaderApp.vue";
       <Tracks />
 
       <div class="grid grid-rows-[5fr_1fr] max-h-fit">
-        <div id="ranking" class="bg-white border border-[#DFDFDF] rounded-2xl p-8">
-          <div class="flex justify-between">
-            <Title title="Ranking" />
-            <TrendingUp class="text-[#424242]" />
-          </div>
-          <div class="mt-12">
-            <RankDiv position="1" picture="src/assets/avatar/avatar-two.svg" name="Daenerys Targaryen"
-              backgroundColor="#F2E6B8" strokeColor="#C9B465" />
-            <RankDiv position="2" picture="src/assets/avatar/avatar-one.svg" name="Você" backgroundColor="#E6E8EC"
-              strokeColor="#BBC1CB" />
-            <RankDiv position="3" picture="src/assets/avatar/avatar-three.svg" name="Tyrion Lannister"
-              backgroundColor="#E3C2A6" strokeColor="#B9906E" />
-            <RankDiv position="4" picture="src/assets/avatar/avatar-four.svg" name="Arya Stark"
-              backgroundColor="#FFFFFF" strokeColor="#E6E6E6" />
-            <RankDiv position="5" picture="src/assets/avatar/avatar-five.svg" name="Jon Snow" backgroundColor="#FFFFFF"
-              strokeColor="#E6E6E6" />
-          </div>
-          <div class="flex justify-end">
-            <p class="text-sm text-[#6C6C6C] mt-3">O ranking expira em 07/01</p>
-          </div>
-          <div class="flex items-center justify-center">
-            <span class="text-3xl text-[#6C6C6C] mt-2">...</span>
-          </div>
-          <Button title="Ver Ranking Completo" color="#98BF45" shadowColor="#6F8C30"
-            class="text-lg m-auto mt-6 px-14 py-2.5" />
-        </div>
+        <Rank />
         <div id="daily-challenge"
           class="bg-linear-to-r from-[#95CAE6] to-[#DCF3FF] border border-[#DFDFDF] rounded-2xl py-4 px-6 mt-6">
           <div class="flex items-center gap-4">
