@@ -8,14 +8,14 @@ const { challenge } = defineProps([
 
 </script>
 <template>
-    <div class="flex items-center justify-between rounded-2xl py-6 px-10" :style="{
-        backgroundColor: challenge.finished
+    <router-link :to="`/app/challenge/${challenge.id}`" class="flex items-center justify-between rounded-2xl py-6 px-10" :style="{
+        backgroundColor: challenge.status === 'finished'
             ? track.metadata.backgroundColor
             : `${track.metadata.backgroundColor}80`,
-        boxShadow: challenge.finished
+        boxShadow: challenge.status === 'finished'
             ? `8px 8px 0 ${track.metadata.effectsColor}`
             : `8px 8px 0 ${track.metadata.effectsColor}80`,
-        color: challenge.finished
+        color: challenge.status === 'finished'
             ? track.metadata.textColor
             : `${track.metadata.textColor}80`
     }">
@@ -37,5 +37,5 @@ const { challenge } = defineProps([
                 <p class="bg-white rounded-3xl mx-auto py-1 px-4">+{{ challenge.score }} pontos</p>
             </div>
         </div>
-    </div>
+    </router-link>
 </template>
