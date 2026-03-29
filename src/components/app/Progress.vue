@@ -23,7 +23,7 @@ const fetchProgress = async () => {
 
         data.level = response.data.data.level;
 
-        data.needed_score = response.data.data.level.next_level.needed_score;
+        data.needed_score = response.data.data.level.next_level?.needed_score;
     } finally {
         loading.value = false;
     }
