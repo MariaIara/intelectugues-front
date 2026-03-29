@@ -39,19 +39,19 @@ onMounted(() => {
 </script>
 <template>
     <HeaderApp />
-    <section class="bg-linear-to-r from-[#E7F1F5] to-[#F7FCFD] pt-10 px-20">
-        <div class="max-w-360 mx-auto">
-            <CardTrackPage />
-        </div>
-    </section>
-    <section class="bg-linear-to-r from-[#E7F1F5] to-[#F7FCFD] py-12 px-20 min-h-screen">
-        <div class="bg-white rounded-2xl border border-[#DFDFDF] max-w-360 mx-auto px-10 py-12">
-            <div v-for="challenge in trackWithChallenges.challenges" :key="challenge.id" class="py-8">
-                <ChallengeItem :challenge="challenge" :track="trackWithChallenges.track" />
+    <section class="bg-linear-to-r from-[#E7F1F5] to-[#F7FCFD] min-h-screen pt-10 px-20 pb-10">
+        <div class="max-w-5xl w-full mx-auto">
+            <div class="max-w-360 mx-auto">
+                <CardTrackPage />
             </div>
-
-            <div v-if="!loading && trackWithChallenges.challenges.length === 0" class="text-center text-lg py-10">
-                Nenhum desafio encontrado :(
+            <div class="bg-white rounded-2xl border border-[#DFDFDF] max-w-360 mx-auto mt-8 px-10">
+                <div v-for="challenge in trackWithChallenges.challenges" :key="challenge.id" class="py-8">
+                    <ChallengeItem :challenge="challenge" :track="trackWithChallenges.track" />
+                </div>
+    
+                <div v-if="!loading && trackWithChallenges.challenges.length === 0" class="text-center text-lg py-10">
+                    Nenhum desafio encontrado :(
+                </div>
             </div>
         </div>
     </section>
