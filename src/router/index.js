@@ -6,6 +6,7 @@ import Register from '@/pages/auth/Register.vue'
 import LandingPage from '@/pages/LandingPage.vue'
 import TrackPage from '@/pages/app/TrackPage.vue'
 import ChallengePage from '@/pages/app/ChallengePage.vue'
+import Profile from '@/pages/app/Profile.vue'
 
 const routes = [
   {
@@ -23,6 +24,13 @@ const routes = [
   {
     path: '/app',
     component: Home,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/profile',
+    component: Profile,
     meta: {
       requiresAuth: true
     }

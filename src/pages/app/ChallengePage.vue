@@ -8,7 +8,6 @@ const loading    = ref(true);
 const route      = useRoute();
 const router     = useRouter();
 
-// ── Quiz state ───────────────────────────────────────────
 const currentIndex    = ref(0);
 const selectedAlt     = ref(null);
 const answered        = ref(false);
@@ -22,7 +21,6 @@ const showXP          = ref(false);
 const showStreak      = ref(false);
 const xpEarned        = ref(0);
 
-// ── Derived ─────────────────────────────────────────────
 const questions       = computed(() => challenge.value?.questions ?? []);
 const currentQuestion = computed(() => questions.value[currentIndex.value]);
 const completedPct    = computed(() =>
@@ -33,7 +31,6 @@ const completedPct    = computed(() =>
 const hearts = computed(() => Math.max(0, 3 - wrongCount.value));
 const letters = ['A', 'B', 'C', 'D', 'E'];
 
-// ── API ─────────────────────────────────────────────────
 async function loadChallenge(id) {
   try {
     const { data } = await api.get(`challenges/${id}`);
@@ -46,7 +43,6 @@ async function loadChallenge(id) {
 }
 onMounted(() => loadChallenge(route.params.id));
 
-// ── Actions ─────────────────────────────────────────────
 function selectAlternative(alt) {
   if (answered.value || animating.value) return;
   selectedAlt.value = alt;
@@ -62,7 +58,6 @@ function selectAlternative(alt) {
   } else {
     streakCount.value = 0;
     wrongCount.value++;
-    // Permite tentar novamente após um breve feedback visual
     setTimeout(() => {
       answered.value    = false;
       selectedAlt.value = null;
@@ -105,7 +100,6 @@ function goBack() {
     router.push('/app/track/' + challenge.value.track_id);
 }
 
-// ── Alt helpers ──────────────────────────────────────────
 function altClass(alt) {
   if (!answered.value)
     return 'border-slate-200 bg-white hover:border-[#488FB5] hover:bg-sky-50 hover:translate-x-1.5 hover:shadow-md cursor-pointer';
@@ -128,7 +122,6 @@ function altLetterClass(alt) {
 </script>
 
 <template>
-  <!-- ══════ LOADING ══════ -->
   <div v-if="loading" class="min-h-screen bg-slate-50 flex items-center justify-center">
     <div class="flex flex-col items-center gap-4">
       <div class="w-10 h-10 border-4 border-t-transparent rounded-full animate-spin" style="border-color: #488FB5; border-top-color: transparent;"></div>
@@ -136,10 +129,8 @@ function altLetterClass(alt) {
     </div>
   </div>
 
-  <!-- ══════ MAIN ══════ -->
   <div v-else-if="challenge" class="min-h-screen bg-slate-50 flex flex-col">
 
-    <!-- ── Header ── -->
     <header class="bg-white border-b border-slate-200 px-5 py-5 flex items-center gap-3 sticky top-0 z-20 shadow-sm">
 
       <button
@@ -153,7 +144,6 @@ function altLetterClass(alt) {
         Voltar
       </button>
 
-      <!-- Progress bar (takes most space) -->
       <div class="flex-1 flex flex-col gap-1 min-w-0">
         <div class="flex items-center justify-between text-xs font-semibold">
           <span class="text-slate-400">{{ currentIndex + 1 }} / {{ questions.length }}</span>
@@ -169,7 +159,6 @@ function altLetterClass(alt) {
         </div>
       </div>
 
-      <!-- Hearts -->
       <div class="flex items-center gap-0.5 shrink-0">
         <span
           v-for="n in 3" :key="n"
@@ -178,14 +167,12 @@ function altLetterClass(alt) {
         >❤️</span>
       </div>
 
-      <!-- XP counter -->
       <div class="flex items-center gap-1.5 rounded-full px-3 py-1.5 shrink-0" style="background-color: #DF786E;">
         <span class="text-base leading-none">⚡</span>
         <span class="text-sm font-bold text-white">{{ totalCorrect * 10 }} XP</span>
       </div>
     </header>
 
-    <!-- ── Floating toasts ── -->
     <Transition
       enter-active-class="transition-all duration-300 ease-out"
       enter-from-class="opacity-0 -translate-y-4 scale-90"
@@ -216,7 +203,6 @@ function altLetterClass(alt) {
       </div>
     </Transition>
 
-    <!-- ── Main content ── -->
     <main class="flex-1 flex flex-col px-4 sm:px-8 py-6 w-full max-w-3xl mx-auto">
 
       <Transition
@@ -230,7 +216,6 @@ function altLetterClass(alt) {
       >
         <div :key="currentQuestion.id" class="flex flex-col gap-4 flex-1">
 
-          <!-- ── Question card ── -->
           <div class="bg-slate-100 rounded-3xl shadow-sm border border-slate-200 px-8 py-7">
             <div class="flex items-center justify-between mb-5">
               <span class="text-xs font-bold uppercase tracking-widest rounded-lg px-3 py-1.5"
@@ -255,7 +240,6 @@ function altLetterClass(alt) {
             </p>
           </div>
 
-          <!-- ── Alternatives ── -->
           <div class="flex flex-col gap-3 flex-1">
             <button
               v-for="(alt, i) in currentQuestion.alternatives"
@@ -289,7 +273,6 @@ function altLetterClass(alt) {
             </button>
           </div>
 
-          <!-- ── Feedback ── -->
           <Transition
             enter-active-class="transition-all duration-300 ease-out"
             enter-from-class="opacity-0 translate-y-4"
@@ -344,7 +327,6 @@ function altLetterClass(alt) {
     </main>
   </div>
 
-  <!-- ══════ COMPLETION MODAL ══════ -->
   <Transition
     enter-active-class="transition-all duration-300 ease-out"
     enter-from-class="opacity-0"
@@ -375,7 +357,6 @@ function altLetterClass(alt) {
             Você completou <span class="font-bold text-slate-700">{{ challenge.name }}</span>
           </p>
 
-          <!-- Stats row -->
           <div class="grid grid-cols-3 gap-3 mb-5">
             <div class="rounded-2xl py-4 px-2 flex flex-col items-center gap-1"
                  style="background:#e8f4fb; border: 1px solid #b3d6ea;">
@@ -397,7 +378,6 @@ function altLetterClass(alt) {
             </div>
           </div>
 
-          <!-- Score -->
           <div class="rounded-2xl px-6 py-4 mb-6 text-white"
                style="background: linear-gradient(135deg, #488FB5, #6BAED6);">
             <p class="text-xs font-bold uppercase tracking-widest opacity-80 mb-0.5">Pontuação do desafio</p>

@@ -4,6 +4,9 @@ import Logo from "@/components/Logo.vue";
 import { onMounted, reactive, ref } from 'vue';
 import { api } from '@/lib/api';
 import DropdownMenu from './DropdownMenu.vue';
+import { useRoute } from 'vue-router';
+
+const router = useRoute();
 
 const loading = ref(false);
 
@@ -11,7 +14,7 @@ const data = reactive({
   user: {},
 });
 
-const fetchProgress = async () => {
+const fetchUser = async () => {
   try {
     loading.value = true;
     const response = await api.get('/profile');
@@ -22,7 +25,7 @@ const fetchProgress = async () => {
 }
 
 onMounted(() => {
-  fetchProgress();
+  fetchUser();
 });
 
 </script>
@@ -43,7 +46,7 @@ onMounted(() => {
           </div>
         </div>
 
-        <DropdownMenu :user="data.user" />
+        <DropdownMenu v-if="router.path != '/profile'" :user="data.user" />
 
       </div>
     </div>
