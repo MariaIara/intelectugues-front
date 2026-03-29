@@ -38,7 +38,7 @@ onMounted(() => {
     <div class="bg-white border border-[#DFDFDF] rounded-2xl p-8">
         <div class="flex justify-between">
             <Title title="Acompanhe seu Progresso" />
-            <a href="#" class="text-sm text-[#6E6E6E] underline">Ver Mais</a>
+            <!-- <a href="#" class="text-sm text-[#6E6E6E] underline">Ver Mais</a> -->
         </div>
         <div class="grid grid-cols-3 items-center mt-6 gap-4">
             <div class="bg-[#FAE8E7] text-[#F25041] border-4 border-[#F25041] rounded-2xl text-center px-12 py-6">
