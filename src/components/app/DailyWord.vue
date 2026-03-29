@@ -62,7 +62,7 @@ const handleFavorite = async () => {
                 <h4 class="font-medium text-2xl text-white">{{ data.word }}</h4>
                 <p class="text-sm text-[#E6E6E6]">{{ data.category }}</p>
             </div>
-            <button class="self-start" @click="handleFavorite">
+            <button class="self-start cursor-pointer hover:scale-125 transition-all" @click="handleFavorite">
                 <Star :fill="data.is_favorited ? '#FFF2E1' : 'none'" :stroke="data.is_favorited ? '#FFF2E1' : '#FFF2E1'"
                     class="text-white" />
             </button>

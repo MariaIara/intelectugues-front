@@ -29,7 +29,7 @@ const iconGradient = computed(() =>
 <template>
     <template v-if="isRight">
         <router-link :to="`/app/track/${track.id}`"
-            class="border-r-2 border-[#D9D9D9] p-6 flex justify-start items-center">
+            class="border-r-2 border-[#D9D9D9] p-6 flex justify-start items-center hover:opacity-80 transition-all">
             <div class="flex justify-between items-center gap-6 rounded-3xl p-6 w-full" :style="{
                 backgroundColor: track.metadata.backgroundColor,
                 border: `3px solid ${track.metadata.effectsColor}`,
@@ -70,7 +70,7 @@ const iconGradient = computed(() =>
         </div>
 
         <router-link :to="`/app/track/${track.id}`"
-            class="border-l-2 border-[#D9D9D9] p-6 flex justify-end items-center">
+            class="border-l-2 border-[#D9D9D9] p-6 flex justify-end items-center hover:opacity-80 transition-all">
             <div class="flex justify-between items-center gap-6 rounded-3xl p-6 w-full" :style="{
                 backgroundColor: track.metadata.backgroundColor,
                 border: `3px solid ${track.metadata.effectsColor}`,

@@ -21,9 +21,9 @@ const fetchProgress = async () => {
         const response = await api.get('/profile');
         Object.assign(data, response.data.data);
 
-        data.level = response.data.data.level.name;
-        data.needed_score = response.data.data.level.next_level.needed_score;
-        data.percentual_progress = (data.general_score / data.needed_score) * 100;
+        data.level = response.data.data.level;
+
+        data.needed_score = response.data.data.level.next_level?.needed_score;
     } finally {
         loading.value = false;
     }
@@ -53,15 +53,15 @@ onMounted(() => {
             </div>
             <div class="bg-[#C6E0ED] text-[#246385] border-4 border-[#246385] rounded-2xl text-center px-12 py-6">
                 <CircleStar class="m-auto w-8 h-8" />
-                <p class="font-medium font-[Poppins] text-2xl mt-2">{{ data.level }}</p>
+                <p class="font-medium font-[Poppins] text-2xl mt-2">{{ data.level.name }}</p>
                 <p>Nível</p>
             </div>
         </div>
         <div class="mt-6">
-            <p class="text-sm">Seu progresso no nível {{ data.level }} é de {{ data.percentual_progress }}%</p>
+            <p class="text-sm">Seu progresso no nível {{ data.level.name }} é de {{ data.level.percentual_progress }}%</p>
             <div class="block bg-[#BDBDBD] rounded-full w-full h-3.5">
                 <div class="bg-linear-to-r from-[#98BF45] to-[#6F8C30] rounded-full h-3.5 mt-1" :style="{
-                    width: `${data.percentual_progress}%`
+                    width: `${data.level.percentual_progress}%`
                 }"></div>
             </div>
         </div>

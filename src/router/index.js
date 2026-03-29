@@ -5,6 +5,7 @@ import NotFound from '@/pages/error/NotFound.vue'
 import Register from '@/pages/auth/Register.vue'
 import LandingPage from '@/pages/LandingPage.vue'
 import TrackPage from '@/pages/app/TrackPage.vue'
+import ChallengePage from '@/pages/app/ChallengePage.vue'
 
 const routes = [
   {
@@ -29,6 +30,13 @@ const routes = [
   {
     path: '/app/track/:id',
     component: TrackPage,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/app/challenge/:id',
+    component: ChallengePage,
     meta: {
       requiresAuth: true
     }

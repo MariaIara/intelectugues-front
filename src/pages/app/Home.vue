@@ -1,8 +1,6 @@
 <script setup>
 import Achievement from "@/components/Achievement.vue";
-import Button from "@/components/Button.vue";
 import DailyWord from "@/components/app/DailyWord.vue";
-import RankDiv from "@/components/app/RankDiv.vue";
 import Title from "@/components/Title.vue";
 import { BookOpenCheck, GraduationCap, Medal, Rocket, TrendingUp, Zap } from "lucide-vue-next";
 import Progress from "@/components/app/Progress.vue";
