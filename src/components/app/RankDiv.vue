@@ -36,7 +36,7 @@ const colors = {
         border: `3px solid ${colors[index]?.strokeColor}`
     }">
         <span class="text-xl text-[#5B5B5B]">{{ index }}°</span>
-        <img :src="userRank?.avatar.image" alt="avatar" class="w-12">
+        <img :src="userRank?.avatar?.image" alt="avatar" class="w-12">
         <p class="text-lg ml-4">{{ userRank?.name }}</p>
     </div>
 </template>
