@@ -2,7 +2,8 @@ import axios from "axios";
 import { handleApiErrors } from "./handleApiErrors";
 
 export const api = axios.create({
-    baseURL: 'http://localhost/api',
+    // baseURL: 'http://localhost/api',
+    baseURL: 'https://intelectugues-api.onrender.com/api',
     headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
