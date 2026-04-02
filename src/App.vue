@@ -1,5 +1,5 @@
 <script>
-await fetch('http://localhost/sanctum/csrf-cookie', {
+await fetch('https://intelectugues-api.onrender.com/sanctum/csrf-cookie', {
   credentials: 'include'
 });
 </script>
