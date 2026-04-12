@@ -1,5 +1,7 @@
 <script setup>
 import Loading from '@/components/Loading.vue'
+import QuestionStandard from '@/components/questions/QuestionStandard.vue'
+import QuestionFillInTheBlank from '@/components/questions/QuestionFillInTheBlank.vue'
 import { api } from '@/lib/api'
 import { HeartCrackIcon, HeartIcon, Trophy, ZapIcon } from 'lucide-vue-next'
 import { ref, computed, onMounted } from 'vue'
@@ -29,6 +31,11 @@ const showVictory = ref(false)
 
 const questions = computed(() => challenge.value?.questions ?? [])
 const currentQuestion = computed(() => questions.value[currentIndex.value])
+const questionComponent = computed(() =>
+  currentQuestion.value?.template_type === 'fill_in_the_blank'
+    ? QuestionFillInTheBlank
+    : QuestionStandard
+)
 const completedPct = computed(() =>
   questions.value.length
     ? ((currentIndex.value + (answered.value && isCorrect.value ? 1 : 0)) /
@@ -37,8 +44,6 @@ const completedPct = computed(() =>
     : 0
 )
 const hearts = computed(() => Math.max(0, 3 - wrongCount.value))
-const letters = ['A', 'B', 'C', 'D', 'E']
-
 async function loadChallenge(id) {
   try {
     const { data } = await api.get(`challenges/${id}`)
@@ -168,50 +173,6 @@ function reloadPage() {
   window.location.reload()
 }
 
-function altClass(alt) {
-  if (!answered.value)
-    return `
-      option-button option-idle
-      border-slate-200 bg-white
-      hover:border-[#488FB5]
-      hover:bg-sky-50
-      cursor-pointer
-    `
-
-  if (isCorrect.value && alt.is_correct)
-    return `
-      option-button option-correct
-      border-[#98BF45]
-      bg-[#98BF45]/10
-      cursor-default
-    `
-
-  if (selectedAlt.value?.id === alt.id && !alt.is_correct)
-    return `
-      option-button option-wrong
-      border-[#F25041]
-      bg-[#F25041]/10
-      cursor-default
-    `
-
-  return `
-    option-button option-disabled
-    border-slate-200 bg-white opacity-35 cursor-default
-  `
-}
-
-function altLetterClass(alt) {
-  if (!answered.value)
-    return 'bg-slate-100 text-slate-500 border-slate-200 group-hover:bg-sky-100 group-hover:border-[#488FB5] group-hover:text-[#488FB5]'
-
-  if (isCorrect.value && alt.is_correct)
-    return 'bg-[#6F8C30] text-white border-[#6F8C30]'
-
-  if (selectedAlt.value?.id === alt.id && !alt.is_correct)
-    return 'bg-[#F25041] text-white border-[#F25041]'
-
-  return 'bg-slate-100 text-slate-400 border-slate-200'
-}
 </script>
 
 <template>
@@ -271,58 +232,17 @@ function altLetterClass(alt) {
           leave-to-class="opacity-0 -translate-x-10"
           mode="out-in"
         >
-          <div :key="currentQuestion.id" class="min-w-200 flex flex-col gap-4 flex-1">
-            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 px-8 py-7">
-              <p class="text-xl sm:text-2xl font-bold text-[#424242] leading-relaxed font-[Poppins]">
-                {{ currentQuestion.statement }}
-              </p>
-            </div>
-
-            <div class="flex flex-col gap-3 flex-1">
-              <button
-                v-for="(alt, i) in currentQuestion.alternatives"
-                :key="alt.id"
-                @click="selectAlternative(alt)"
-                :disabled="answered || lost"
-                class="group flex items-center gap-4 w-full text-left border-2 rounded-2xl px-6 py-5"
-                :class="altClass(alt)"
-              >
-                <span
-                  class="w-10 h-10 shrink-0 rounded-xl border-2 flex items-center justify-center text-sm font-extrabold transition-all duration-200"
-                  :class="altLetterClass(alt)"
-                >
-                  {{ letters[i] }}
-                </span>
-
-                <span class="flex-1 text-base font-semibold text-slate-700 leading-snug">
-                  {{ alt.text }}
-                </span>
-
-                <span class="w-6 h-6 shrink-0 flex items-center justify-center">
-                  <svg
-                    v-if="answered && isCorrect && alt.is_correct"
-                    class="text-emerald-500 w-6 h-6"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="3"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M20 6L9 17l-5-5" />
-                  </svg>
-                  <svg
-                    v-else-if="answered && selectedAlt?.id === alt.id && !alt.is_correct"
-                    class="text-red-500 w-6 h-6"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="3"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M18 6L6 18M6 6l12 12" />
-                  </svg>
-                </span>
-              </button>
-            </div>
-          </div>
+          <component
+            :is="questionComponent"
+            :key="currentQuestion.id"
+            :question="currentQuestion"
+            :answered="answered"
+            :selectedAlt="selectedAlt"
+            :isCorrect="isCorrect"
+            :lost="lost"
+            @select="selectAlternative"
+            class="min-w-200 flex-1"
+          />
         </Transition>
 
         <Transition
@@ -391,39 +311,3 @@ function altLetterClass(alt) {
   </div>
 </template>
 
-<style scoped>
-.option-button {
-  transition:
-    transform 0.15s ease-out,
-    box-shadow 0.15s ease-out,
-    background-color 0.2s,
-    border-color 0.2s;
-}
-
-.option-idle {
-  box-shadow: 4px 4px 0 #cbd5e1;
-}
-
-.option-idle:hover {
-  transform: translate(3px, 3px);
-  box-shadow: 1px 1px 0 #cbd5e1;
-}
-
-.option-idle:active {
-  transform: translate(4px, 4px);
-  box-shadow: 0 0 0 #cbd5e1;
-}
-
-.option-correct {
-  box-shadow: 4px 4px 0 #6F8C30;
-}
-
-.option-wrong {
-  box-shadow: 4px 4px 0 #D96055;
-}
-
-.option-disabled {
-  box-shadow: none;
-  transform: none;
-}
-</style>
