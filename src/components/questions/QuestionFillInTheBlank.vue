@@ -33,8 +33,8 @@ function chipClass(alt) {
 </script>
 
 <template>
-  <div class="flex flex-col gap-8">
-    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 px-8 py-10">
+  <div class="flex flex-col gap-4 sm:gap-8">
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 px-4 py-6 sm:px-8 sm:py-10">
       <p class="text-xl sm:text-2xl font-bold text-[#424242] leading-loose font-[Poppins] flex flex-wrap items-center gap-x-3 gap-y-2">
         <span v-if="parts[0]">{{ parts[0] }}</span>
 
@@ -61,7 +61,7 @@ function chipClass(alt) {
         :key="alt.id"
         @click="emit('select', alt)"
         :disabled="answered || lost"
-        class="px-6 py-5 rounded-xl border-2 text-base font-bold transition-all duration-200"
+        class="px-3 py-3 sm:px-6 sm:py-5 rounded-xl border-2 text-sm sm:text-base font-bold transition-all duration-200"
         :class="chipClass(alt)"
       >
         <span class="flex items-center justify-center gap-2">

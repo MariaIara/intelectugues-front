@@ -179,7 +179,7 @@ function reloadPage() {
   <Loading v-if="loading" />
 
   <div v-else-if="challenge" class="min-h-screen bg-slate-50 flex flex-col">
-    <header class="bg-white border-b border-slate-200 px-5 py-8 flex items-center gap-5 sticky top-0 z-20 shadow-sm">
+    <header class="bg-white border-b border-slate-200 px-3 py-3 sm:px-5 sm:py-8 flex items-center gap-2 sm:gap-5 sticky top-0 z-20 shadow-sm">
       <button
         @click="goBack"
         class="flex items-center gap-1.5 text-sm font-medium text-slate-500 hover:text-slate-800 border border-slate-200 hover:border-slate-400 rounded-lg px-3 py-1.5 transition-all shrink-0 cursor-pointer"
@@ -210,20 +210,20 @@ function reloadPage() {
           class="text-lg transition-all duration-300"
           :class="n <= hearts ? 'scale-100' : 'opacity-20 grayscale scale-90'"
         >
-          <HeartIcon class="w-6 h-6 text-[#F25041]" />
+          <HeartIcon class="w-5 h-5 sm:w-6 sm:h-6 text-[#F25041]" />
         </span>
       </div>
 
       <div
         class="flex items-center gap-1.5 rounded-full px-3 py-1.5 shrink-0 border border-[#F25041] bg-[#FAE8E7] text-[#F25041]"
       >
-        <ZapIcon class="w-6 h-6" />
-        <span class="text-sm font-bold">{{ challenge.score }} XP</span>
+        <ZapIcon class="w-5 h-5 sm:w-6 sm:h-6" />
+        <span class="text-xs sm:text-sm font-bold">{{ challenge.score }} XP</span>
       </div>
     </header>
 
-    <main class="flex-1 bg-linear-to-r from-[#E7F1F5] to-[#F7FCFD] flex flex-col px-4 sm:px-8 py-6 w-screen">
-      <div class="max-w-3xl mx-auto">
+    <main class="flex-1 bg-linear-to-r from-[#E7F1F5] to-[#F7FCFD] flex flex-col px-2 sm:px-8 py-4 sm:py-6 w-screen">
+      <div class="w-full sm:max-w-3xl sm:mx-auto">
         <Transition
           enter-active-class="transition-all duration-300 ease-out"
           enter-from-class="opacity-0 translate-x-10"
@@ -241,7 +241,7 @@ function reloadPage() {
             :isCorrect="isCorrect"
             :lost="lost"
             @select="selectAlternative"
-            class="min-w-200 flex-1"
+            class="flex-1"
           />
         </Transition>
 
@@ -265,7 +265,7 @@ function reloadPage() {
 
     <Transition enter-active-class="transition duration-200" enter-from-class="opacity-0" enter-to-class="opacity-100">
       <div v-if="lost" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-        <div class="bg-white rounded-2xl shadow-xl p-8 max-w-sm w-full text-center flex flex-col gap-3">
+        <div class="bg-white rounded-2xl shadow-xl p-5 sm:p-8 mx-4 max-w-sm w-full text-center flex flex-col gap-3">
           <h2 class="flex justify-center items-center gap-2 text-2xl font-bold text-[#424242]">
             Você perdeu
             <HeartCrackIcon class="w-7 h-7" />
@@ -284,8 +284,8 @@ function reloadPage() {
 
     <Transition enter-active-class="transition duration-200" enter-from-class="opacity-0" enter-to-class="opacity-100">
       <div v-if="showVictory" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-        <div class="bg-white rounded-2xl shadow-xl p-10 max-w-md w-full text-center flex flex-col gap-4">
-          <h2 class="text-3xl font-bold text-[#424242] flex justify-center items-center gap-2">
+        <div class="bg-white rounded-2xl shadow-xl p-6 sm:p-10 mx-4 max-w-md w-full text-center flex flex-col gap-4">
+          <h2 class="text-2xl sm:text-3xl font-bold text-[#424242] flex justify-center items-center gap-2">
             Desafio Concluído!
             <Trophy class="w-8 h-8 text-[#F2DC4E]" />
           </h2>

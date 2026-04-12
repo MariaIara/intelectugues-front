@@ -39,13 +39,13 @@ onMounted(() => {
 </script>
 <template>
     <HeaderApp />
-    <section class="bg-linear-to-r from-[#E7F1F5] to-[#F7FCFD] min-h-screen pt-10 px-20 pb-10">
+    <section class="bg-linear-to-r from-[#E7F1F5] to-[#F7FCFD] min-h-screen pt-10 px-4 sm:px-10 lg:px-20 pb-10">
         <div class="max-w-5xl w-full mx-auto">
             <div class="max-w-360 mx-auto">
                 <CardTrackPage />
             </div>
-            <div class="bg-white rounded-2xl border border-[#DFDFDF] max-w-360 mx-auto mt-8 px-10">
-                <div v-for="challenge in trackWithChallenges.challenges" :key="challenge.id" class="py-8">
+            <div class="bg-white rounded-2xl border border-[#DFDFDF] max-w-360 mx-auto mt-4 sm:mt-8 px-3 sm:px-6 md:px-10">
+                <div v-for="challenge in trackWithChallenges.challenges" :key="challenge.id" class="py-3 sm:py-5 md:py-8">
                     <ChallengeItem :challenge="challenge" :track="trackWithChallenges.track" />
                 </div>
     

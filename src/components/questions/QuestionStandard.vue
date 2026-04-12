@@ -59,7 +59,7 @@ function altLetterClass(alt) {
 
 <template>
   <div class="flex flex-col gap-4">
-    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 px-8 py-7">
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 px-4 py-5 sm:px-8 sm:py-7">
       <p class="text-xl sm:text-2xl font-bold text-[#424242] leading-relaxed font-[Poppins]">
         {{ question.statement }}
       </p>
@@ -71,11 +71,11 @@ function altLetterClass(alt) {
         :key="alt.id"
         @click="emit('select', alt)"
         :disabled="answered || lost"
-        class="group flex items-center gap-4 w-full text-left border-2 rounded-2xl px-6 py-5"
+        class="group flex items-center gap-2 sm:gap-4 w-full text-left border-2 rounded-2xl px-3 py-3 sm:px-6 sm:py-5"
         :class="altClass(alt)"
       >
         <span
-          class="w-10 h-10 shrink-0 rounded-xl border-2 flex items-center justify-center text-sm font-extrabold transition-all duration-200"
+          class="w-8 h-8 sm:w-10 sm:h-10 shrink-0 rounded-xl border-2 flex items-center justify-center text-sm font-extrabold transition-all duration-200"
           :class="altLetterClass(alt)"
         >
           {{ letters[i] }}

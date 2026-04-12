@@ -67,23 +67,23 @@ const iconGradient = computed(() => {
 
 
 <template>
-    <section class="bg-white px-10 p-6 rounded-2xl border border-[#DFDFDF]">
-        <div class="flex items-center justify-between">
+    <section class="bg-white px-4 sm:px-6 md:px-10 p-6 rounded-2xl border border-[#DFDFDF]">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div class="flex items-center gap-4">
-                <div class="rounded-2xl w-fit p-4" :style="{
+                <div class="rounded-2xl w-fit p-3 sm:p-4 shrink-0" :style="{
                     background: iconGradient
                 }">
-                    <component :is="icons[track?.metadata.icon]" class="h-12 w-12"
+                    <component :is="icons[track?.metadata.icon]" class="h-8 w-8 sm:h-12 sm:w-12"
                         :style="{ color: track?.metadata.backgroundColor }" />
                 </div>
-                <div class="text-[#424242] mx-4">
-                    <h1 class="font-[Poppins] font-semibold text-2xl">{{ track?.name }}</h1>
-                    <p class="">{{ track?.description }}</p>
+                <div class="text-[#424242]">
+                    <h1 class="font-[Poppins] font-semibold text-xl sm:text-2xl">{{ track?.name }}</h1>
+                    <p class="text-sm sm:text-base">{{ track?.description }}</p>
                 </div>
             </div>
-            <div class="">
+            <div class="sm:text-right">
                 <p class="text-[#5B5B5B] text-md">Progresso</p>
-                <div class="flex justify-end text-lg">
+                <div class="flex sm:justify-end text-lg">
                     <p>{{ track?.track_progress }}%</p>
                 </div>
             </div>

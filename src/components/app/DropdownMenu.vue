@@ -22,8 +22,9 @@ const logout = async () => {
 </script>
 
 <template>
-    <div class="relative" @mouseenter="showDropdown = true" @mouseleave="showDropdown = false">
-        <img :src="props.user?.avatar?.image" alt="avatar" class="w-12 cursor-pointer border-2 border-[#E7F1F5] rounded-full">
+    <router-link to="/profile" class="relative" @mouseenter="showDropdown = true" @mouseleave="showDropdown = false">
+        <img :src="props.user?.avatar?.image" alt="avatar"
+            class="w-12 cursor-pointer border-2 border-[#E7F1F5] rounded-full">
         <transition name="fade">
             <div v-if="showDropdown"
                 class="absolute right-0 w-44 bg-white rounded-xl shadow-xl py-2 border border-gray-100 z-50">
@@ -40,5 +41,5 @@ const logout = async () => {
                 </button>
             </div>
         </transition>
-    </div>
+    </router-link>
 </template>

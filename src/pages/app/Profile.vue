@@ -30,7 +30,7 @@ const progress = computed(() => {
 
         <HeaderApp />
 
-        <div class="max-w-360 mx-auto grid grid-cols-[2fr_1.5fr]">
+        <div class="max-w-360 mx-auto grid grid-cols-1 lg:grid-cols-[2fr_1.5fr]">
             <section class="w-full px-4 mt-10 space-y-6">
 
                 <div class="bg-white rounded-2xl shadow-sm p-8 flex flex-col items-center text-center">
@@ -94,7 +94,7 @@ const progress = computed(() => {
                 </div>
 
             </section>
-            <section class="w-full px-4 mt-10">
+            <section class="w-full px-4 mt-10 mb-10">
                 <FavoriteWordsList />
             </section>
         </div>
