@@ -52,12 +52,12 @@ const handleFavorite = async () => {
 </script>
 
 <template>
-    <div class="bg-[#DF786E] border border-[#B2463C] rounded-2xl p-8">
+    <div class="bg-[#DF786E] border border-[#B2463C] rounded-2xl p-4 md:p-6 xl:p-8">
         <div class="flex justify-between">
             <h3 class="font-semibold font-[Poppins] text-2xl text-[#320202]">Dicionário</h3>
             <a href="#" class="text-sm text-[#FFF2E1]">{{ data.date }}</a>
         </div>
-        <div class="flex justify-between mt-8">
+        <div class="flex justify-between mt-4 md:mt-6 xl:mt-8">
             <div>
                 <h4 class="font-medium text-2xl text-white">{{ data.word }}</h4>
                 <p class="text-sm text-[#E6E6E6]">{{ data.category }}</p>
@@ -67,8 +67,8 @@ const handleFavorite = async () => {
                     class="text-white" />
             </button>
         </div>
-        <p class=" text-white mt-6">{{ data.meaning }}</p>
-        <div class="flex mt-4 gap-4">
+        <p class="text-white mt-4 md:mt-5 xl:mt-6">{{ data.meaning }}</p>
+        <div class="flex flex-wrap mt-3 md:mt-4 gap-2 md:gap-3 xl:gap-4">
             <span v-for="(synonym, index) in data.synonymous" :key="index"
                 class="bg-[#FFF2E1] border border-[#FFDCAB] text-[#545454] rounded-2xl px-4 py-1"> {{
                     synonym }}

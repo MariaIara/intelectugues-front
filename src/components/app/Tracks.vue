@@ -49,9 +49,9 @@ onMounted(loadTracks)
 </script>
 
 <template>
-    <div id="tracks" class="bg-white border border-[#DFDFDF] rounded-2xl p-8 max-h-fit">
+    <div id="tracks" class="bg-white border border-[#DFDFDF] rounded-2xl p-4 md:p-6 xl:p-8 max-h-fit">
         <Title title="Trilhas de Estudo" />
-        <div class="grid grid-cols-2 mt-6">
+        <div class="grid grid-cols-1 xl:grid-cols-2 mt-4 md:mt-6">
             <TrackItem v-for="track in tracks" :key="track.id" :track="track" />
         </div>
     </div>

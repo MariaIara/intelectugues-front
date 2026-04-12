@@ -25,12 +25,12 @@ onMounted(() => {
 </script>
 
 <template>
-    <div id="ranking" class="bg-white border border-[#DFDFDF] rounded-2xl p-8">
+    <div id="ranking" class="bg-white border border-[#DFDFDF] rounded-2xl p-4 md:p-6 xl:p-8">
         <div class="flex justify-between">
             <Title title="Ranking" />
             <TrendingUp class="text-[#424242]" />
         </div>
-        <div class="mt-12">
+        <div class="mt-4 md:mt-8 xl:mt-12">
             <div v-for="(userRank, index) in usersRank.slice(0, 5)" :key="userRank.id">
                 <RankDiv :userRank="userRank" :index="index + 1" />
             </div>

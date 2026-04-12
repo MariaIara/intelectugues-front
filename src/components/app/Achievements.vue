@@ -57,11 +57,11 @@ onMounted(fetchAchievements);
 </script>
 
 <template>
-    <div id="achievements" class="bg-white border border-[#DFDFDF] rounded-2xl p-8">
+    <div id="achievements" class="bg-white border border-[#DFDFDF] rounded-2xl p-4 md:p-6 xl:p-8">
         <Title title="Suas Conquistas Recentes" />
 
         <div v-for="(row, rowIndex) in achievementRows" :key="rowIndex"
-            class="grid grid-cols-4 items-center justify-center gap-6 mt-6">
+            class="grid grid-cols-2 md:grid-cols-4 items-center justify-center gap-3 md:gap-4 xl:gap-6 mt-4 md:mt-5 xl:mt-6">
             <Achievement v-for="achievement in row" :key="achievement.id"
                 :backgroundColorIcon="colorsByAchievementType[achievement.type]?.backgroundColorIcon"
                 :effectsColor="colorsByAchievementType[achievement.type]?.effectsColor"

@@ -31,7 +31,7 @@ const colors = {
 </script>
 
 <template>
-    <div class="flex items-center rounded-3xl gap-2 mt-5 px-8 py-1.5" :style="{
+    <div class="flex items-center rounded-3xl gap-2 mt-4 px-4 md:px-6 xl:px-8 py-1.5" :style="{
         backgroundColor: colors[index]?.backgroundColor,
         border: `3px solid ${colors[index]?.strokeColor}`
     }">

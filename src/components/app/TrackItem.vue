@@ -29,19 +29,19 @@ const iconGradient = computed(() =>
 <template>
     <template v-if="isRight">
         <router-link :to="`/app/track/${track.id}`"
-            class="border-r-2 border-[#D9D9D9] p-6 flex justify-start items-center hover:opacity-80 transition-all">
-            <div class="flex justify-between items-center gap-6 rounded-3xl p-6 w-full" :style="{
+            class="p-2 xl:border-r-2 xl:border-[#D9D9D9] xl:p-6 flex justify-start items-center hover:opacity-80 transition-all">
+            <div class="flex items-center gap-3 md:gap-5 xl:gap-6 rounded-3xl p-3 md:p-4 xl:p-6 w-full" :style="{
                 backgroundColor: track.metadata.backgroundColor,
                 border: `3px solid ${track.metadata.effectsColor}`,
                 color: track.metadata.textColor
             }">
-                <div class="m-auto p-6 rounded-2xl" :style="{ background: iconGradient }">
-                    <component :is="icons[track.metadata.icon]" class="h-12 w-12"
+                <div class="p-2 md:p-4 xl:p-6 rounded-2xl shrink-0" :style="{ background: iconGradient }">
+                    <component :is="icons[track.metadata.icon]" class="h-8 w-8 md:h-10 md:w-10 xl:h-12 xl:w-12"
                         :style="{ color: track.metadata.backgroundColor }" />
                 </div>
 
-                <div class="flex-1">
-                    <h5 class="font-medium font-[Poppins] text-2xl">{{ track.name }}</h5>
+                <div class="flex-1 min-w-0">
+                    <h5 class="font-medium font-[Poppins] text-lg md:text-xl xl:text-2xl">{{ track.name }}</h5>
 
                     <div class="bg-[#FFFFFF] rounded-full w-full h-2.5 mt-1">
                         <div class="rounded-full w-8/10 h-2.5" :style="{
@@ -55,7 +55,7 @@ const iconGradient = computed(() =>
             </div>
         </router-link>
 
-        <div class="border-l-2 border-[#D9D9D9] p-6 flex justify-center items-center">
+        <div class="hidden xl:flex xl:border-l-2 xl:border-[#D9D9D9] xl:p-6 justify-center items-center">
             <p class="rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.25)] py-2 px-6 max-w-fit">
                 {{ tips[track.index] }}
             </p>
@@ -63,26 +63,26 @@ const iconGradient = computed(() =>
     </template>
 
     <template v-else>
-        <div class="border-r-2 border-[#D9D9D9] p-6 flex justify-center items-center">
+        <div class="hidden xl:flex xl:border-r-2 xl:border-[#D9D9D9] xl:p-6 justify-center items-center">
             <p class="rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.25)] py-2 px-6 max-w-fit">
                 {{ tips[track.index] }}
             </p>
         </div>
 
         <router-link :to="`/app/track/${track.id}`"
-            class="border-l-2 border-[#D9D9D9] p-6 flex justify-end items-center hover:opacity-80 transition-all">
-            <div class="flex justify-between items-center gap-6 rounded-3xl p-6 w-full" :style="{
+            class="p-2 xl:border-l-2 xl:border-[#D9D9D9] xl:p-6 flex justify-end items-center hover:opacity-80 transition-all">
+            <div class="flex items-center gap-3 md:gap-5 xl:gap-6 rounded-3xl p-3 md:p-4 xl:p-6 w-full" :style="{
                 backgroundColor: track.metadata.backgroundColor,
                 border: `3px solid ${track.metadata.effectsColor}`,
                 color: track.metadata.textColor
             }">
-                <div class="m-auto p-6 rounded-2xl" :style="{ background: iconGradient }">
-                    <component :is="icons[track.metadata.icon]" class="h-12 w-12"
+                <div class="p-2 md:p-4 xl:p-6 rounded-2xl shrink-0" :style="{ background: iconGradient }">
+                    <component :is="icons[track.metadata.icon]" class="h-8 w-8 md:h-10 md:w-10 xl:h-12 xl:w-12"
                         :style="{ color: track.metadata.backgroundColor }" />
                 </div>
 
-                <div class="flex-1">
-                    <h5 class="font-medium font-[Poppins] text-2xl">{{ track.name }}</h5>
+                <div class="flex-1 min-w-0">
+                    <h5 class="font-medium font-[Poppins] text-lg md:text-xl xl:text-2xl">{{ track.name }}</h5>
 
                     <div class="bg-[#FFFFFF] rounded-full w-full h-2.5 mt-1">
                         <div class="rounded-full w-8/10 h-2.5" :style="{
