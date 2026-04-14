@@ -3,20 +3,26 @@ import { TrendingUp } from 'lucide-vue-next';
 import Title from '../Title.vue';
 import RankDiv from './RankDiv.vue';
 import Button from '../Button.vue';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, computed } from 'vue';
 import { api } from '@/lib/api';
+import { nextMonday, format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 
 const usersRank = ref([]);
 const loading = ref(false);
 
+const rankingExpiry = computed(() => {
+    const expiry = nextMonday(new Date());
+    return format(expiry, "dd/MM", { locale: ptBR });
+});
+
 async function loadRank() {
     try {
         loading.value = true;
-        const response = await api.get('/users/ranking');
-
-        usersRank.value = response.data.data.data;
+        const rankResponse = await api.get('/users/ranking');
+        usersRank.value = rankResponse.data.data.data;
     } catch (error) {
-        console.error('Erro ao buscar trilhas:', error);
+        console.error('Erro ao buscar ranking:', error);
     } finally {
         loading.value = false;
     }
@@ -60,7 +66,7 @@ onMounted(() => {
                 </div>
             </div>
             <div class="flex justify-end">
-                <p class="text-sm text-[#6C6C6C] mt-3">O ranking expira em 07/01</p>
+                <p class="text-sm text-[#6C6C6C] mt-3">O ranking expira em {{ rankingExpiry }}</p>
             </div>
             <div class="flex items-center justify-center">
                 <span class="text-3xl text-[#6C6C6C] mt-2">...</span>

@@ -2,7 +2,7 @@
 
 defineProps({
     userRank: Object,
-    index: Number
+    index: Number,
 })
 
 const colors = {
@@ -31,12 +31,16 @@ const colors = {
 </script>
 
 <template>
-    <div class="flex items-center rounded-3xl gap-2 mt-4 px-4 md:px-6 xl:px-8 py-1.5" :style="{
+    <div class="flex items-center rounded-2xl gap-3 mt-3 px-3 md:px-4 py-2" :style="{
         backgroundColor: colors[index]?.backgroundColor,
-        border: `3px solid ${colors[index]?.strokeColor}`
+        border: `2px solid ${colors[index]?.strokeColor}`
     }">
-        <span class="text-xl text-[#5B5B5B]">{{ index }}°</span>
-        <img :src="userRank?.avatar?.image" alt="avatar" class="w-12">
-        <p class="text-lg ml-4">{{ userRank?.name }}</p>
+        <span class="text-base font-bold text-[#5B5B5B] w-6 shrink-0 text-center">{{ index }}°</span>
+        <img :src="userRank?.avatar?.image" alt="avatar" class="w-10 h-10 rounded-full shrink-0 object-cover">
+        <p class="text-sm font-medium text-[#424242] flex-1 truncate">{{ userRank?.name }}</p>
+        <span
+            class="text-xs font-semibold text-[#246385] bg-[#246385]/10 px-2.5 py-1 rounded-full shrink-0 whitespace-nowrap">
+            {{ userRank?.weekly_score }} pts
+        </span>
     </div>
 </template>
