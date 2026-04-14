@@ -78,7 +78,7 @@ onMounted(fetchAchievements);
         <template v-else>
             <Title title="Suas Conquistas Recentes" />
             <div v-for="(row, rowIndex) in achievementRows" :key="rowIndex"
-                class="grid grid-cols-2 md:grid-cols-4 items-center justify-center gap-3 md:gap-4 xl:gap-6 mt-4 md:mt-5 xl:mt-6">
+                class="grid grid-cols-2 md:grid-cols-4 items-stretch gap-3 md:gap-4 xl:gap-6 mt-4 md:mt-5 xl:mt-6">
                 <Achievement v-for="achievement in row" :key="achievement.id"
                     :backgroundColorIcon="colorsByAchievementType[achievement.type]?.backgroundColorIcon"
                     :effectsColor="colorsByAchievementType[achievement.type]?.effectsColor"

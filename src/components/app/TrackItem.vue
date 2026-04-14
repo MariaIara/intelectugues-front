@@ -56,7 +56,7 @@ const iconGradient = computed(() =>
         </router-link>
 
         <div class="hidden xl:flex xl:border-l-2 xl:border-[#D9D9D9] xl:p-6 justify-center items-center">
-            <p class="rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.25)] py-2 px-6 max-w-fit">
+            <p class="rounded-full shadow-[0_2px_10px_rgba(0,0,0,0.08)] py-2 px-6 max-w-fit">
                 {{ tips[track.index] }}
             </p>
         </div>
@@ -64,7 +64,7 @@ const iconGradient = computed(() =>
 
     <template v-else>
         <div class="hidden xl:flex xl:border-r-2 xl:border-[#D9D9D9] xl:p-6 justify-center items-center">
-            <p class="rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.25)] py-2 px-6 max-w-fit">
+            <p class="rounded-full shadow-[0_2px_10px_rgba(0,0,0,0.08)] py-2 px-6 max-w-fit">
                 {{ tips[track.index] }}
             </p>
         </div>
