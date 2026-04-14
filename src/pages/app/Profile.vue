@@ -6,12 +6,6 @@ import { Flame, LogOut, Trophy, Pencil, X, Check } from 'lucide-vue-next';
 import { onMounted, reactive, computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
-import avatarOne from '@/assets/avatar/avatar-one.svg';
-import avatarTwo from '@/assets/avatar/avatar-two.svg';
-import avatarThree from '@/assets/avatar/avatar-three.svg';
-import avatarFour from '@/assets/avatar/avatar-four.svg';
-import avatarFive from '@/assets/avatar/avatar-five.svg';
-
 const router = useRouter();
 
 const data = reactive({
@@ -48,24 +42,50 @@ const logout = async () => {
     }
 };
 
-// Modal de edição
 const showEditModal = ref(false);
-
-const avatarOptions = [avatarOne, avatarTwo, avatarThree, avatarFour, avatarFive];
+const savingProfile = ref(false);
+const avatars = ref([]);
 
 const editForm = reactive({
     name: '',
-    selectedAvatar: ''
+    avatarId: null
 });
+
+const fetchAvatars = async () => {
+    try {
+        const response = await api.get('/avatars');
+        avatars.value = response.data.data ?? response.data;
+    } catch (error) {
+        console.error('Erro ao buscar avatares:', error);
+    }
+};
 
 const openEditModal = () => {
     editForm.name = data.user?.name ?? '';
-    editForm.selectedAvatar = data.user?.avatar?.image ?? avatarOptions[0];
+    editForm.avatarId = data.user?.avatar?.id ?? null;
+    if (!avatars.value.length) fetchAvatars();
     showEditModal.value = true;
 };
 
 const closeEditModal = () => {
     showEditModal.value = false;
+};
+
+const saveProfile = async () => {
+    try {
+        savingProfile.value = true;
+        const payload = {};
+        if (editForm.name) payload.name = editForm.name;
+        if (editForm.avatarId) payload.avatar_id = editForm.avatarId;
+
+        const response = await api.patch('/profile', payload);
+        data.user = response.data.data;
+        closeEditModal();
+    } catch (error) {
+        console.error('Erro ao salvar perfil:', error);
+    } finally {
+        savingProfile.value = false;
+    }
 };
 </script>
 
@@ -198,7 +218,7 @@ const closeEditModal = () => {
 
                     <h2 class="text-xl font-bold text-[#424242] font-[Poppins] mb-6">Editar Perfil</h2>
 
-                    <form @submit.prevent class="space-y-6">
+                    <form @submit.prevent="saveProfile" class="space-y-6">
 
                         <div class="flex flex-col gap-1.5">
                             <label class="text-sm font-medium text-gray-600">Nome</label>
@@ -208,26 +228,34 @@ const closeEditModal = () => {
 
                         <div class="flex flex-col gap-2">
                             <label class="text-sm font-medium text-gray-600">Avatar</label>
-                            <div class="grid grid-cols-5 gap-3">
-                                <button v-for="avatar in avatarOptions" :key="avatar" type="button"
-                                    @click="editForm.selectedAvatar = avatar"
-                                    class="rounded-full border-2 transition overflow-hidden cursor-pointer" :class="editForm.selectedAvatar === avatar
+                            <div v-if="avatars.length" class="grid grid-cols-5 gap-3">
+                                <button v-for="avatar in avatars" :key="avatar.id" type="button"
+                                    @click="editForm.avatarId = avatar.id"
+                                    class="rounded-full border-2 transition overflow-hidden cursor-pointer aspect-square"
+                                    :class="editForm.avatarId === avatar.id
                                         ? 'border-[#98BF45] shadow-md scale-105'
                                         : 'border-transparent hover:border-gray-300'">
-                                    <img :src="avatar" alt="avatar" class="w-full h-full object-cover" />
+                                    <img :src="avatar.image" :alt="avatar.name ?? 'avatar'" class="w-full h-full object-cover" />
                                 </button>
+                            </div>
+                            <div v-else class="flex gap-2">
+                                <div v-for="i in 5" :key="i" class="w-14 h-14 rounded-full bg-gray-100 animate-pulse" />
                             </div>
                         </div>
 
                         <div class="flex gap-3 justify-end pt-2">
-                            <button type="button" @click="closeEditModal"
-                                class="px-5 py-2.5 text-sm text-gray-500 border border-gray-200 rounded-xl hover:bg-gray-50 transition cursor-pointer">
+                            <button type="button" @click="closeEditModal" :disabled="savingProfile"
+                                class="px-5 py-2.5 text-sm text-gray-500 border border-gray-200 rounded-xl hover:bg-gray-50 transition cursor-pointer disabled:opacity-50">
                                 Cancelar
                             </button>
-                            <button type="submit"
-                                class="flex items-center gap-2 px-5 py-2.5 text-sm text-white bg-[#98BF45] rounded-xl hover:bg-[#87ac38] transition cursor-pointer font-medium">
-                                <Check class="w-4 h-4" />
-                                Salvar
+                            <button type="submit" :disabled="savingProfile"
+                                class="flex items-center gap-2 px-5 py-2.5 text-sm text-white bg-[#98BF45] rounded-xl hover:bg-[#87ac38] transition cursor-pointer font-medium disabled:opacity-60 disabled:cursor-not-allowed">
+                                <Check v-if="!savingProfile" class="w-4 h-4" />
+                                <svg v-else class="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
+                                </svg>
+                                {{ savingProfile ? 'Salvando...' : 'Salvar' }}
                             </button>
                         </div>
 
