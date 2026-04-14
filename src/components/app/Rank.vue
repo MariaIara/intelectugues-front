@@ -4,12 +4,14 @@ import Title from '../Title.vue';
 import RankDiv from './RankDiv.vue';
 import Button from '../Button.vue';
 import { onMounted, ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
 import { api } from '@/lib/api';
 import { nextMonday, format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 
 const usersRank = ref([]);
 const loading = ref(false);
+const router = useRouter();
 
 const rankingExpiry = computed(() => {
     const expiry = nextMonday(new Date());
@@ -71,7 +73,7 @@ onMounted(() => {
             <div class="flex items-center justify-center">
                 <span class="text-3xl text-[#6C6C6C] mt-2">...</span>
             </div>
-            <Button title="Ver Ranking Completo" color="#98BF45" shadowColor="#6F8C30"
+            <Button @click="router.push('/ranking')" title="Ver Ranking Completo" color="#98BF45" shadowColor="#6F8C30"
                 class="text-lg m-auto mt-6 px-14 py-2.5" />
         </template>
 

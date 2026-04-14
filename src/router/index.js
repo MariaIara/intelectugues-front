@@ -7,6 +7,7 @@ import LandingPage from '@/pages/LandingPage.vue'
 import TrackPage from '@/pages/app/TrackPage.vue'
 import ChallengePage from '@/pages/app/ChallengePage.vue'
 import Profile from '@/pages/app/Profile.vue'
+import RankingPage from '@/pages/app/RankingPage.vue'
 
 const routes = [
   {
@@ -31,6 +32,13 @@ const routes = [
   {
     path: '/profile',
     component: Profile,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/ranking',
+    component: RankingPage,
     meta: {
       requiresAuth: true
     }
