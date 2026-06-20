@@ -39,8 +39,8 @@ const questionComponent = computed(() =>
 const completedPct = computed(() =>
   questions.value.length
     ? ((currentIndex.value + (answered.value && isCorrect.value ? 1 : 0)) /
-        questions.value.length) *
-      100
+      questions.value.length) *
+    100
     : 0
 )
 const hearts = computed(() => Math.max(0, 3 - wrongCount.value))
@@ -179,11 +179,10 @@ function reloadPage() {
   <Loading v-if="loading" />
 
   <div v-else-if="challenge" class="min-h-screen bg-slate-50 flex flex-col">
-    <header class="bg-white border-b border-slate-200 px-3 py-3 sm:px-5 sm:py-8 flex items-center gap-2 sm:gap-5 sticky top-0 z-20 shadow-sm">
-      <button
-        @click="goBack"
-        class="flex items-center gap-1.5 text-sm font-medium text-slate-500 hover:text-slate-800 border border-slate-200 hover:border-slate-400 rounded-lg px-3 py-1.5 transition-all shrink-0 cursor-pointer"
-      >
+    <header
+      class="bg-white border-b border-slate-200 px-3 py-3 sm:px-5 sm:py-8 flex items-center gap-2 sm:gap-5 sticky top-0 z-20 shadow-sm">
+      <button @click="goBack"
+        class="flex items-center gap-1.5 text-sm font-medium text-slate-500 hover:text-slate-800 border border-slate-200 hover:border-slate-400 rounded-lg px-3 py-1.5 transition-all shrink-0 cursor-pointer">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
           <path d="M19 12H5M5 12l7-7M5 12l7 7" />
         </svg>
@@ -198,66 +197,46 @@ function reloadPage() {
         <div class="h-3.5 bg-slate-200 rounded-full overflow-hidden">
           <div
             class="bg-linear-to-r from-[#98BF45] to-[#6F8C30] h-full rounded-full transition-all duration-500 ease-out"
-            :style="{ width: completedPct + '%' }"
-          ></div>
+            :style="{ width: completedPct + '%' }"></div>
         </div>
       </div>
 
       <div class="flex items-center gap-0.5 shrink-0">
-        <span
-          v-for="n in 3"
-          :key="n"
-          class="text-lg transition-all duration-300"
-          :class="n <= hearts ? 'scale-100' : 'opacity-20 grayscale scale-90'"
-        >
+        <span v-for="n in 3" :key="n" class="text-lg transition-all duration-300"
+          :class="n <= hearts ? 'scale-100' : 'opacity-20 grayscale scale-90'">
           <HeartIcon class="w-5 h-5 sm:w-6 sm:h-6 text-[#F25041]" />
         </span>
       </div>
 
       <div
-        class="flex items-center gap-1.5 rounded-full px-3 py-1.5 shrink-0 border border-[#F25041] bg-[#FAE8E7] text-[#F25041]"
-      >
+        class="relative flex items-center gap-1.5 rounded-full px-3 py-1.5 shrink-0 border border-[#F25041] bg-[#FAE8E7] text-[#F25041]">
+        <div v-if="wrongCount === 0"
+          class="absolute -top-2 -right-2 flex items-center justify-center min-w-5 h-5 px-1 rounded-full bg-[#F25041] text-white text-[10px] font-bold">
+          x2
+        </div>
+
         <ZapIcon class="w-5 h-5 sm:w-6 sm:h-6" />
-        <span class="text-xs sm:text-sm font-bold">{{ challenge.score }} XP</span>
+        <span class="text-xs sm:text-sm font-bold">
+          {{ challenge.score }} XP
+        </span>
       </div>
     </header>
 
     <main class="flex-1 bg-linear-to-r from-[#E7F1F5] to-[#F7FCFD] flex flex-col px-2 sm:px-8 py-4 sm:py-6 w-screen">
       <div class="w-full sm:max-w-3xl sm:mx-auto">
-        <Transition
-          enter-active-class="transition-all duration-300 ease-out"
-          enter-from-class="opacity-0 translate-x-10"
-          enter-to-class="opacity-100 translate-x-0"
-          leave-active-class="transition-all duration-280 ease-in"
-          leave-to-class="opacity-0 -translate-x-10"
-          mode="out-in"
-        >
-          <component
-            :is="questionComponent"
-            :key="currentQuestion.id"
-            :question="currentQuestion"
-            :answered="answered"
-            :selectedAlt="selectedAlt"
-            :isCorrect="isCorrect"
-            :lost="lost"
-            @select="selectAlternative"
-            class="flex-1"
-          />
+        <Transition enter-active-class="transition-all duration-300 ease-out"
+          enter-from-class="opacity-0 translate-x-10" enter-to-class="opacity-100 translate-x-0"
+          leave-active-class="transition-all duration-280 ease-in" leave-to-class="opacity-0 -translate-x-10"
+          mode="out-in">
+          <component :is="questionComponent" :key="currentQuestion.id" :question="currentQuestion" :answered="answered"
+            :selectedAlt="selectedAlt" :isCorrect="isCorrect" :lost="lost" @select="selectAlternative" class="flex-1" />
         </Transition>
 
-        <Transition
-          enter-active-class="transition-all duration-300 ease-out"
-          enter-from-class="opacity-0 translate-y-4"
-          enter-to-class="opacity-100 translate-y-0"
-        >
+        <Transition enter-active-class="transition-all duration-300 ease-out" enter-from-class="opacity-0 translate-y-4"
+          enter-to-class="opacity-100 translate-y-0">
           <div v-if="isCorrect && currentIndex < questions.length - 1" class="ml-auto shrink-0">
-            <Button
-              title="Próxima >"
-              color="#98BF45"
-              shadowColor="#6F8C30"
-              @click="nextQuestion"
-              class="mx-auto mt-5"
-            />
+            <Button title="Próxima >" color="#98BF45" shadowColor="#6F8C30" @click="nextQuestion"
+              class="mx-auto mt-5" />
           </div>
         </Transition>
       </div>
@@ -271,13 +250,8 @@ function reloadPage() {
             <HeartCrackIcon class="w-7 h-7" />
           </h2>
           <p class="text-slate-500">Você usou todas as vidas. Tente novamente.</p>
-          <Button
-            title="Tentar novamente"
-            color="#98BF45"
-            shadowColor="#6F8C30"
-            @click="reloadPage"
-            class="mx-auto mt-3"
-          />
+          <Button title="Tentar novamente" color="#98BF45" shadowColor="#6F8C30" @click="reloadPage"
+            class="mx-auto mt-3" />
         </div>
       </div>
     </Transition>
@@ -294,20 +268,13 @@ function reloadPage() {
 
           <div class="flex justify-center items-center gap-2 text-[#98BF45] font-bold">
             <ZapIcon class="w-6 h-6" />
-            {{ wrongCount == 0 ? (challenge.score * 2) : challenge.score  }} XP ganhos
+            {{ wrongCount == 0 ? (challenge.score * 2) : challenge.score }} XP ganhos
           </div>
 
-          <Button
-            title="Concluir Desafio"
-            color="#F2DC4E"
-            shadowColor="#d1bc32"
-            @click="goBack()"
-            class="mx-auto mt-4",
-            style="color: #786801"
-          />
+          <Button title="Concluir Desafio" color="#F2DC4E" shadowColor="#d1bc32" @click="goBack()" class="mx-auto mt-4"
+            , style="color: #786801" />
         </div>
       </div>
     </Transition>
   </div>
 </template>
-
