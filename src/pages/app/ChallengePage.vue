@@ -294,7 +294,7 @@ function reloadPage() {
 
           <div class="flex justify-center items-center gap-2 text-[#98BF45] font-bold">
             <ZapIcon class="w-6 h-6" />
-            {{ challenge.score }} XP ganhos
+            {{ wrongCount == 0 ? (challenge.score * 2) : challenge.score  }} XP ganhos
           </div>
 
           <Button
