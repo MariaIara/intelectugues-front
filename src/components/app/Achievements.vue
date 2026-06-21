@@ -67,7 +67,8 @@ onMounted(fetchAchievements);
         <template v-if="loading">
             <div class="h-6 bg-gray-200 rounded-full w-52 animate-pulse" />
             <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 xl:gap-6 mt-4 md:mt-5 xl:mt-6">
-                <div v-for="i in 8" :key="i" class="animate-pulse flex flex-col items-center gap-3 bg-gray-50 border border-gray-200 rounded-2xl p-4">
+                <div v-for="i in 8" :key="i"
+                    class="animate-pulse flex flex-col items-center gap-3 bg-gray-50 border border-gray-200 rounded-2xl p-4">
                     <div class="w-14 h-14 bg-gray-200 rounded-full" />
                     <div class="h-3 bg-gray-200 rounded-full w-full" />
                     <div class="h-3 bg-gray-200 rounded-full w-3/4" />
@@ -77,13 +78,14 @@ onMounted(fetchAchievements);
 
         <template v-else>
             <Title title="Suas Conquistas Recentes" />
-            <div v-for="(row, rowIndex) in achievementRows" :key="rowIndex"
+            <div v-if="data.achievements.length > 0" v-for="(row, rowIndex) in achievementRows" :key="rowIndex"
                 class="grid grid-cols-2 md:grid-cols-4 items-stretch gap-3 md:gap-4 xl:gap-6 mt-4 md:mt-5 xl:mt-6">
                 <Achievement v-for="achievement in row" :key="achievement.id"
                     :backgroundColorIcon="colorsByAchievementType[achievement.type]?.backgroundColorIcon"
                     :effectsColor="colorsByAchievementType[achievement.type]?.effectsColor"
                     :icon="colorsByAchievementType[achievement.type]?.icon" :text="achievement.description" />
             </div>
+            <p v-else class="mt-5 text-[#6C6C6C]">Você ainda não possui nenhuma conquista.</p>
         </template>
 
     </div>
