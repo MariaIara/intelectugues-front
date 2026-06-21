@@ -21,9 +21,9 @@ import Achievements from "@/components/app/Achievements.vue";
     <section id="section-two" class="max-w-360 max-h-fit mx-auto grid grid-cols-1 md:grid-cols-[2.3fr_1fr] px-3 md:px-5 mt-3 md:mt-5 xl:mt-6 gap-3 md:gap-5 xl:gap-6">
       <Tracks />
 
-      <div class="flex flex-col md:grid md:grid-rows-[5fr_1fr] max-h-fit">
+      <!-- <div class="flex flex-col md:grid md:grid-rows-[5fr_1fr] max-h-fit"> -->
         <Rank />
-        <div id="daily-challenge"
+        <!-- <div id="daily-challenge"
           class="bg-linear-to-r from-[#95CAE6] to-[#DCF3FF] border border-[#DFDFDF] rounded-2xl py-3 px-4 md:py-4 md:px-6 mt-3 md:mt-5 xl:mt-6">
           <div class="flex items-center gap-4">
             <Title title="Desafio Diário" class="mt-2" />
@@ -33,8 +33,8 @@ import Achievements from "@/components/app/Achievements.vue";
             Ganhe + 100 pontos extras.
             <a href="#" class="underline">Comece agora.</a>
           </p>
-        </div>
-      </div>
+        </div> -->
+      <!-- </div> -->
     </section>
 
     <section id="section-three" class="max-w-360 mx-auto px-3 md:px-5 mt-3 md:mt-5 xl:mt-6 gap-6">

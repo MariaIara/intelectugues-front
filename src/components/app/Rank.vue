@@ -63,7 +63,7 @@ onMounted(() => {
                 <TrendingUp class="text-[#424242]" />
             </div>
             <div class="mt-4 md:mt-8 xl:mt-12">
-                <div v-for="(userRank, index) in usersRank.slice(0, 5)" :key="userRank.id">
+                <div v-for="(userRank, index) in usersRank.slice(0, 8)" :key="userRank.id">
                     <RankDiv :userRank="userRank" :index="index + 1" />
                 </div>
             </div>
