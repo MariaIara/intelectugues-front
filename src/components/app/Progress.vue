@@ -73,7 +73,7 @@ onMounted(() => {
                 </div>
             </div>
             <div class="mt-4 md:mt-5 xl:mt-6">
-                <p class="text-sm">Seu progresso no nível {{ data.level.name }} é de {{ data.level.percentual_progress }}%</p>
+                <p class="text-sm">Seu progresso no nível {{ data.level.name }} é de {{ Math.floor(data.level.percentual_progress) }}%</p>
                 <div class="block bg-[#BDBDBD] rounded-full w-full h-3.5">
                     <div class="bg-linear-to-r from-[#98BF45] to-[#6F8C30] rounded-full h-3.5 mt-1" :style="{
                         width: `${data.level.percentual_progress}%`
