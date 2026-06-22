@@ -171,7 +171,7 @@ const saveProfile = async () => {
                             <p class="text-gray-400 text-sm">Sequência</p>
                             <h2 class="text-3xl flex gap-2 justify-center items-center font-bold text-[#F25041] mt-2">
                                 <Flame class="w-8 h-8" />
-                                {{ data.user?.weekly_sequence }}
+                                {{ data.user?.general_sequence }}
                             </h2>
                         </div>
 
